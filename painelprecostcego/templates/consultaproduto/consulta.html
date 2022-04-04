@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+{% extends "consultaproduto/base.html"%}
+
+{% block head %}
+<title>Consulta de Produtos</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h1>Consulta de Produtos</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" class="form form-inline">
+                    <div class="row">
+                        {{ form }}
+                        {% csrf_token %}
+                    </div>
+                    <div class="row mb-3">
+                        <input type="submit" value="Buscar" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% if produtos %}
+<div class="container">
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <th>EAN</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.ean }}</td>
+                <td>{{ produto.descricao }}</td>
+                <td>{{ produto.preco }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
